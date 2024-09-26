@@ -1,0 +1,33 @@
+.jobs-card{
+  list-style: none;
+  background-color: rgb(71, 65, 65);
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.title-icon-rating-cont{
+  display: flex;
+  flex-direction: row;
+}
+.card-icon{
+  width: 60px;
+  margin-right: 10px;
+}
+.rating-icon{
+  color: yellow;
+  margin-right: 5px;
+}
+.location-eptype-package-cont{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  align-items: auto;
+  justify-content: space-between;
+}
+.location{
+  margin-right: 10px;
+}
+.all-jobs-card{
+  text-decoration:none ;
+}

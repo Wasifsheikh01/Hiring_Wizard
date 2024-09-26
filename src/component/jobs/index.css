@@ -1,0 +1,23 @@
+.jobs-main{
+  width: 100%;
+  min-height: 100%;
+  background-color: black;
+  display:flex;
+
+
+}
+.filter-jobs{
+width: 25%;
+color: wheat;
+height: 100vh;
+/* border: 1px solid white; */
+}
+.jobs-section{
+width:70%;
+/* height: 100vh; */
+/* border: 1px solid white; */
+display: flex;
+flex-direction: column;
+align-items: center;
+    padding: 15px;
+}
