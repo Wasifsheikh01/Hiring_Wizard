@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
-import './index.css'
+import './index.css';
+import Cookies from "js-cookies";
 
+const FilterSection = (props) => {
+  const token = Cookies.getItem("jwt-token");
+  const [allValues,setvalue] = useState({
+    profileDetails:{},
+})
+const {onChangeEmpType, onChangeSalary} = props;
 // These are the lists used in the application. You can move them to any component needed.
 const employmentTypesList = [
   {
@@ -40,35 +47,35 @@ const salaryRangesList = [
   },
 ]
 
-const FilterSection = (props) => {
 
-  const onChangeEmploymentType = props;
 
-  const [allValues,setvalue] = useState({
-      profileDetails:{}
-  })
+  
+
+  
 
   useEffect(()=>{
 
-    const getProfileDetails = async () => {
+    const fetchApi = async () => {
 
-      const apiUrl = 'https://apis.ccbp.in/profile'
+      const apiUrl = 'https://apis.ccbp.in/profile';
+
       const options = {
+        method: 'GET',
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByYW5lZXRoYSIsInJvbGUiOiJQUklNRV9VU0VSIiwiaWF0IjoxNjIzMDY1NTMyfQ.68FuDFraHW7GplQiXVUrnsU1goYgmwd0tXNk6-HxCok`,
         },
-        method: 'GET',
-      }
+        
+      };
       const response = await fetch(apiUrl, options)
       const data = await response.json()
-      console.log(data)
+      
       if (response.ok === true) {
         setvalue({...allValues,profileDetails:data.profile_details})
      
       }
       console.log(data);
     }
-    getProfileDetails();
+    fetchApi();
 
   },[])
 
@@ -76,11 +83,9 @@ const FilterSection = (props) => {
 
   const renderEmploymentTypesList = () => {
 
-    const onChangeEmpType = (event)=>{
-
-      const isChecked = event.target.checked;
-
-      onChangeEmploymentType(event.target.value,isChecked);
+    const onChangeEmpType = (e)=>{
+      // const isChecked = event.target.checked
+      onChangeEmpType(e.target.value,e.target.checked);
     }
     
     return employmentTypesList.map(eachType => {
@@ -110,8 +115,11 @@ const FilterSection = (props) => {
   )
 
   const renderSalaryRangesList = () => {
+    const onChnaegSalary = (event)=>{
+      onChnaegSalary(event.target.value);
+    }
 
-    return salaryRangesList.map(eachRange => {
+    return salaryRangesList.map((eachRange) => {
 
 
       return (
@@ -121,6 +129,7 @@ const FilterSection = (props) => {
             className="checkbox-input"
             value={eachRange.salaryRangeId}
             name="salary ranges"
+            onChange={onChnaegSalary}
           />
           <label htmlFor={eachRange.salaryRangeId} className="filter-label">
             {eachRange.label}
@@ -129,7 +138,6 @@ const FilterSection = (props) => {
       )
     })
   }
-
   const renderSalaryRangesTypes = () => (
     <>
       <h1 className="filter-heading">Salary Range</h1>
@@ -137,13 +145,15 @@ const FilterSection = (props) => {
     </>
   )
 
-  const renderProfileDetails = ()=>(
+  const renderProfileDetails = ()=>{
+    return(
     <div className="profile-details-container">
         <img src={allValues.profileDetails.profile_image_url} alt="profile" className="profile-image" />
         <h1 className="profile-name">{allValues.profileDetails.name}</h1>
         <p className="profile-bio">{allValues.profileDetails.short_bio}</p>
       </div>
-  )
+  );
+}
 
   return (
     <div className="filters-group-container">
