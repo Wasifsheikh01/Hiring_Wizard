@@ -7,7 +7,7 @@ const FilterSection = (props) => {
   const [allValues,setvalue] = useState({
     profileDetails:{},
 })
-const {onChangeEmpType, onChangeSalary} = props;
+const {onChangeEmpTyp, onChangeSalaryRange} = props;
 // These are the lists used in the application. You can move them to any component needed.
 const employmentTypesList = [
   {
@@ -85,7 +85,7 @@ const salaryRangesList = [
 
     const onChangeEmpType = (e)=>{
       // const isChecked = event.target.checked
-      onChangeEmpType(e.target.value,e.target.checked);
+      onChangeEmpTyp(e.target.value,e.target.checked);
     }
     
     return employmentTypesList.map(eachType => {
@@ -116,7 +116,7 @@ const salaryRangesList = [
 
   const renderSalaryRangesList = () => {
     const onChnaegSalary = (event)=>{
-      onChnaegSalary(event.target.value);
+      onChangeSalaryRange(event.target.value);
     }
 
     return salaryRangesList.map((eachRange) => {

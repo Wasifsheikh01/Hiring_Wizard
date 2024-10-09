@@ -54,12 +54,14 @@ const Jobs = () => {
   const onChangeEmpTyp = (value, isChecked) => {
     if (isChecked === true) {
       setValues({ ...allValues, empType: [...allValues.empType, value] });
+      
     } else {
       setValues({
         ...allValues,
         empType: allValues.empType.filter((each) => each !== value),
       });
     }
+    console.log("working")
   }
     //dasada
 
