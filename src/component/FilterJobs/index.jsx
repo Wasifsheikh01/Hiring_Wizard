@@ -46,9 +46,6 @@ const salaryRangesList = [
     label: '40 LPA and above',
   },
 ]
-
-
-
   
 
   
