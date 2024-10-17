@@ -66,6 +66,7 @@ const Login = () => {
             User ID
           </label>
           <input
+          placeholder="rahul"
             type="text"
             className="form-control"
             id="exampleInputEmail1"
@@ -78,6 +79,7 @@ const Login = () => {
             Password
           </label>
           <input
+          placeholder="rahul@2021"
             type="password"
             className="form-control"
             id="exampleInputPassword1"
