@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import Cookies from "js-cookies";
+import Cookies from "js-cookie"
 import "./index.css";
 
 const JobsItemsDetails = ()=>{
-  const {id:jobsItemId} = useParams();
+  const { id } = useParams();
+  const token = Cookies.get("jwt_token");
+ 
 
   const [allValues,setValue] = useState({
-    jobsItem :{}
+    viewJobDetails: {},
+    viewSkills: {},
+    viewSimilarJobs: {},
   });
 
 
@@ -15,30 +19,34 @@ const JobsItemsDetails = ()=>{
 
     const fetchJobsItems = async()=>{
 
-      const url = `https://apis.ccbp.in/jobs/${jobsItemId}`;
+      const url = `https://apis.ccbp.in/jobs/${id}`;
       const options = {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByYW5lZXRoYSIsInJvbGUiOiJQUklNRV9VU0VSIiwiaWF0IjoxNjIzMDY1NTMyfQ.68FuDFraHW7GplQiXVUrnsU1goYgmwd0tXNk6-HxCok",
+          Authorization: `Bearer ${token}`, 
         },
       };
 
       const response = await fetch(url,options);
       const data = await response.json();
-      console.log(data.job_details);
-      console.log(data.similar_jobs);
+      console.log(data);
 
-
-    }
+      if (response.ok=== true){
+        setValue({
+          ...allValues,
+          viewJobDetails: data.job_details,
+          viewSkills: data.job_details.skills,
+          viewLifeAtCompany : fetchData.job_details.life_at_company,
+          viewSimilarJobs: fetchData.similar_jobs,
+        })
+      }
+    };
     fetchJobsItems();
 
 
-  },[])
+  },[]);
 
-  return (
-    <h1 className="job-details-page">Jobs Items Details</h1>
-  )
+  return <h1>hey</h1>
 }
 
 
